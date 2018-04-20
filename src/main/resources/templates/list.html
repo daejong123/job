@@ -5,8 +5,9 @@
     <title>展示</title>
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.js"></script>
 </head>
-<body  style="margin:20px 30px 20px 30px">
+<body style="margin:20px 30px 20px 30px">
 
 <div class="ui secondary menu">
     <h1>欢迎访问智慧招聘</h1>
@@ -35,6 +36,23 @@
     </div>
 </div>
 
+<div class="ui sub header">多选</div>
+<div id="select" class="ui fluid multiple search selection dropdown">
+    <input name="tags" type="hidden">
+    <i class="dropdown icon"></i>
+    <div class="default text">选择条件</div>
+    <div class="menu">
+        <div class="item" data-value="salary">薪水</div>
+        <div class="item" data-value="company">公司</div>
+        <div class="item" data-value="jobName">职位</div>
+        <div class="item" data-value="pubTime">发布日期</div>
+        <div class="item" data-value="Java">Java</div>
+        <div class="item" data-value="Web">Web</div>
+        <div class="item" data-value="iOS">移动端</div>
+    </div>
+</div>
+
+
 <table class="ui selectable celled striped table center aligned">
     <thead>
     <tr>
@@ -49,6 +67,7 @@
     </thead>
     <tbody>
     <#list list as jobEntity>
+    <tr>
         <td>${jobEntity.jobId}</td>
         <td>${jobEntity.company}</td>
         <td>${jobEntity.jobName}</td>
@@ -56,7 +75,7 @@
         <td>${jobEntity.pubTime}</td>
         <td>${jobEntity.salary}</td>
         <td><a href="${jobEntity.urlInfo}" target="_blank">查看详情</a></td>
-        </tr>
+    </tr>
     </#list>
     </tbody>
 </table>
@@ -84,6 +103,22 @@
             window.location.href = "/job/search/page?searchKey=" + searchkey;
         }
     });
+
+    $('#select').dropdown({
+        allowAdditions: true,
+        maxSelections: 3,
+        onAdd: function (addedValue, addedText, $addedChoice) {
+            // // console.log(addedValue + addedText + $addedChoice);
+            // var searchkey = $("input:text").val();
+            // window.location.href = "/job/search/page?searchKey=" + searchkey + "&searchCondition=" + addedValue;
+        },
+        onRemove: function(removedValue, removedText, $removedChoice) {
+            // console.log(removedValue + removedText + $removedChoice);
+            // var searchkey = $("input:text").val();
+            // window.location.href = "/job/search/page?searchKey=" + searchkey + "&searchCondition=";
+        }
+    })
+
 
 </script>
 </html>

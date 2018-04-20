@@ -25,9 +25,12 @@ public interface JobMapper {
     public List<JobEntity> getAll();
 
     @Select("select * from tb_job where address like concat(concat('%',#{condition}),'%') " +
+            "or id = #{condition} " +
             "or company like concat(concat('%',#{condition}),'%') " +
             "or name like concat(concat('%',#{condition}),'%') " +
-            "or salary like concat(concat('%',#{condition}),'%')")
+            "or salary like concat(concat('%',#{condition}),'%')" +
+            "order by  SUBSTRING_INDEX(salary, '-', 1)"
+    )
     @ResultMap("jobMap")
     public List<JobEntity> fingByCondition(String condition);
 }
