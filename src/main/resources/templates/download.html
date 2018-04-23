@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下载简历</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="${request.contextPath}/layer-v3.1.1/layer/layer.js"></script>
+</head>
+<style>
+    label {
+        text-align: left;
+    }
+</style>
+<body>
+
+<div id="app" class="ui center aligned container" style="padding: 20px 200px">
+
+    <div class="ui dividing header"><h1>简历制作 | <a href="/job/search/page">返回首页</a></h1></div>
+    <div id="inputs" style="margin:20px">
+        <form class="ui form" id="fileUploadForm">
+            <div class="ui field">
+                <label for="name">姓名</label>
+                <div class="ui left icon input">
+                    <input type="text" name="name" v-model='name' placeholder="姓名"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="gender">性别</label>
+                <div class="ui left icon input">
+                    <input type="text" name="gender" v-model='gender' placeholder="性别"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="birth">出生日期</label>
+                <div class="ui left icon input">
+                    <input type="text" name="birth" v-model='birth' placeholder="出生日期"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="notion">民族</label>
+                <div class="ui left icon input">
+                    <input type="text" name="notion" v-model='notion' placeholder="民族"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="province">籍贯</label>
+                <div class="ui left icon input">
+                    <input type="text" name="province" v-model='province' placeholder="籍贯"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="phoneNumber">手机号</label>
+                <div class="ui left icon input">
+                    <input type="text" name="phoneNumber" v-model='phoneNumber' placeholder="手机号"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="email">电子邮箱</label>
+                <div class="ui left icon input">
+                    <input type="text" name="email" v-model='email' placeholder="电子邮箱"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="university">学校</label>
+                <div class="ui left icon input">
+                    <input type="text" name="university" v-model='university' placeholder="毕业院校"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="ui field">
+                <label for="profession">专业</label>
+                <div class="ui left icon input">
+                    <input type="text" name="profession" v-model='profession' placeholder="专业"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+
+            <div class="ui field">
+                <label for="jobDirection">求职方向</label>
+                <div class="ui left icon input">
+                    <input type="text" name="jobDirection" v-model='jobDirection' placeholder="求职方向"/>
+                    <i class="user icon"></i>
+                </div>
+            </div>
+            <div class="ui field">
+                <label for="awardExperience">获奖情况</label>
+                <div class="ui input">
+                    <textarea type="text" name="awardExperience" v-model='awardExperience' placeholder="获奖情况"></textarea>
+                </div>
+            </div>
+            <div class="ui field">
+                <label for="selfDescription">个人描述</label>
+                <div class="ui input">
+                    <textarea type="text" name="selfDescription" v-model='selfDescription' placeholder="个人描述(技能，自我评价)"></textarea>
+                </div>
+            </div>
+            <div class="ui field">
+                <label for="partTimeExperience">实习经历</label>
+                <div class="ui input">
+                    <textarea type="text" name="partTimeExperience" v-model='partTimeExperience' placeholder="实习经历"></textarea>
+                </div>
+            </div>
+            <div class="ui field">
+                <label for="workExperience">工作经历</label>
+                <div class="ui input">
+                    <textarea type="text" name="workExperience" v-model='workExperience' placeholder="工作经历"></textarea>
+                </div>
+            </div>
+
+            <button class="ui primary button" type="submit" @click="submitUser">下载简历</button> <!--type="submit"-->
+            <button class="ui default button" type="reset">重置</button>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            submitUser() {
+                var form = $('#fileUploadForm')[0];
+                var data = new FormData(form);
+                $.ajax({
+                    type: "GET",
+                    url: "/job/resume/make",
+                    async: false,
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                        layer.msg("成功", {
+                            time: 1000
+                        }, function () {
+                            layer.closeAll();
+                        })
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        layer.msg("添加失败")
+                    },
+                    complete: function () {
+                    }
+                })
+            }
+        }
+    })
+
+    //表单验证
+    $('.ui.form').form(
+        {
+            inline: true,
+            on: 'blur',
+            fields: {
+                name: {
+                    identifier: 'name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入name'
+                        }
+                    ]
+                },
+                birth: {
+                    identifier: 'birth',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                gender: {
+                    identifier: 'gender',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                notion: {
+                    identifier: 'notion',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                province: {
+                    identifier: 'province',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                phoneNumber: {
+                    identifier: 'phoneNumber',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                university: {
+                    identifier: 'university',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                email: {
+                    identifier: 'email',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                profession: {
+                    identifier: 'profession',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                jobDirection: {
+                    identifier: 'jobDirection',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                selfDescription: {
+                    identifier: 'selfDescription',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                partTimeExperience: {
+                    identifier: 'partTimeExperience',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                workExperience: {
+                    identifier: 'workExperience',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                },
+                awardExperience: {
+                    identifier: 'awardExperience',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入'
+                        }
+                    ]
+                }
+            }
+        }
+    )
+
+</script>
+</html>
