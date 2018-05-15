@@ -25,4 +25,10 @@ public class ErrorController {
         return "error/500";
     }
 
+    // 配置默认页面
+    @GetMapping(value = "/")
+    public String hello() {
+        return "shouye";
+    }
+
 }

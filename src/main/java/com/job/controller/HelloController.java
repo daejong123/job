@@ -41,7 +41,7 @@ public class HelloController {
                             @RequestParam(value = "searchKey", defaultValue = "", required = false) String key,
                             @RequestParam(value = "searchCondition", defaultValue = "", required = false) String condition,
                             ModelAndView modelAndView) {
-        PageHelper.startPage(page, 14);
+        PageHelper.startPage(page, 10);
 //        List<JobEntity> list = jobService.findAll();
         List<JobEntity> list = jobService.findByCondition(key);
         PageInfo<JobEntity> jobEntityPageInfo = new PageInfo<>(list);

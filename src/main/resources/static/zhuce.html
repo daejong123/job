@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="xiaobeike/login.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/global.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/asyncbox.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/front.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/main_2.css">
+
+
+    <script type="text/javascript" src="xiaobeike/jquery-1.js"></script>
+    <script type="text/javascript" src="xiaobeike/utils.js"></script>
+    <script type="text/javascript" src="xiaobeike/AsyncBox.js"></script>
+    <script type="text/javascript" src="xiaobeike/common.js"></script>
+    <style type="text/css">
+       body {
+            background: url(./login-bj.jpg) no-repeat fixed;
+            background-size: cover
+        }
+
+        body>.grid {
+            height: 100%;
+        }
+
+        .image {
+            margin-top: -100px;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+    </style>
+</head>
+<body>
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui teal image header">
+            <!-- <img src="assets/images/logo.png" class="image"> -->
+            <div class="content">
+                欢迎注册智慧招聘
+            </div>
+        </h2>
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="item item-custips">
+                    <span class="form-tips form-tips-error" style="color:red;"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="email" name="email" onKeyDown="javaScript:if(event.keyCode == 13){signUp();}" placeholder="邮箱"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" onKeyDown="javaScript:if(event.keyCode == 13){signUp();}" placeholder="密码"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password_verity" onKeyDown="javaScript:if(event.keyCode == 13){signUp();}" placeholder="再次确认密码"/>
+                    </div>
+                </div>
+                <div class="ui fluid large teal submit button" onClick="signUp()">注册</div>
+            </div>
+
+            <div class="ui error message"></div>
+
+        </form>
+
+        <div class="ui message">
+            <a href="denglu.html">登陆</a>
+        </div>
+    </div>
+</div>
+<!--云滚动-->
+<div id="demo" class="cloud-pic">
+    <table cellspace="0" align="left" border="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td id="demo1" valign="top">
+                <img src="xiaobeike/cloud-bj.png">
+                <img src="xiaobeike/cloud-bj.png">
+            </td>
+            <td id="demo2" valign="top">
+                <img src="xiaobeike/cloud-bj.png">
+                <img src="xiaobeike/cloud-bj.png">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+  var speed=60
+  demo2.innerHTML=demo1.innerHTML
+  function Marquee(){
+  if(demo2.offsetWidth-demo.scrollLeft<=0)
+  demo.scrollLeft-=demo1.offsetWidth
+  else{
+  demo.scrollLeft++
+  }
+  }
+  var MyMar=setInterval(Marquee,speed)
+  demo.onmouseover=function() {clearInterval(MyMar)}
+  demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+  </script>
+<!--云滚动-->
+<script>
+	//交互demo
+	$(".m-ipt-txt").bind({
+		click:function(){
+			var _this = $(this),
+			ipt_txt = _this.find(".ipt-txt"),
+			ipt_tips = _this.find(".ipt-tips");
+			$(".form-tips-error").html("");
+
+			ipt_tips.hide();
+			ipt_txt.focus();
+			ipt_txt.bind({
+				blur:function(w){
+					if($(this).val() == ""){
+						ipt_tips.show();
+					}
+					$(this).unbind("blur");
+				}
+			});
+		}
+	});
+
+</script>
+</body>
+</html>

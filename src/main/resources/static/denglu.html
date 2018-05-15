@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link type="text/css" rel="stylesheet" href="xiaobeike/login.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/global.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/asyncbox.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/front.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/main_2.css">
+
+
+    <script type="text/javascript" src="xiaobeike/jquery-1.js"></script>
+    <script type="text/javascript" src="xiaobeike/utils.js"></script>
+    <script type="text/javascript" src="xiaobeike/AsyncBox.js"></script>
+    <script type="text/javascript" src="xiaobeike/common.js"></script>
+
+
+</head>
+<body class="body-login">
+<div class="loginbj">
+    <div class="wrapper">
+        <div class="m-login is-login">
+            <div class="formArea">
+                <form method="post" action="/user/login.html" name="aform" id="aform">
+                    <input name="furl" value="" type="hidden">
+                    <div class="m-from">
+                        <div class="item item-custips">
+                            <span class="form-tips form-tips-error"></span>
+                        </div>
+                        <div class="item">
+                            <div class="m-ipt-txt">
+                                <input class="ipt-txt ipt-txt-mail" id="account" onKeyDown="javaScript:if(event.keyCode == 13){signUp();}" placeholder="邮箱" name="account" maxlength="50" type="text">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="m-ipt-txt">
+                                <input class="ipt-txt ipt-txt-pwd" id="pwd" onKeyDown="javaScript:if(event.keyCode == 13){signUp();}" placeholder="密码" name="pwd" maxlength="30" type="password">
+                            </div>
+                        </div>
+                        <div class="item">
+                            <input value="1" name="overtime" id="overtimeInput" type="hidden">
+                        </div>
+                        <div class="item item-submit">
+                            <a class="btn_blueA" href="javascript:;" onClick="signUp();">立即登录</a>
+                            <span class="form-tips">没有账号？<a href="zhuce.html">立即注册</a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="logoArea">
+                <div class="a"   style="margin-top:80px;margin-left:60px ">
+                    <img src="zhihui.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--云滚动-->
+<div id="demo" class="cloud-pic">
+    <table cellspace="0" align="left" border="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td id="demo1" valign="top">
+            <img src="xiaobeike/cloud-bj.png">
+            <img src="xiaobeike/cloud-bj.png">
+            </td>
+            <td id="demo2" valign="top">
+                <img src="xiaobeike/cloud-bj.png">
+                <img src="xiaobeike/cloud-bj.png">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+  var speed=60
+  demo2.innerHTML=demo1.innerHTML
+  function Marquee(){
+  if(demo2.offsetWidth-demo.scrollLeft<=0)
+  demo.scrollLeft-=demo1.offsetWidth
+  else{
+  demo.scrollLeft++
+  }
+  }
+  var MyMar=setInterval(Marquee,speed)
+  demo.onmouseover=function() {clearInterval(MyMar)}
+  demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+  </script>
+<!--云滚动-->
+<script>
+	//交互demo
+	$(".m-ipt-txt").bind({
+		click:function(){
+			var _this = $(this),
+			ipt_txt = _this.find(".ipt-txt"),
+			ipt_tips = _this.find(".ipt-tips");
+			$(".form-tips-error").html("");
+
+			ipt_tips.hide();
+			ipt_txt.focus();
+			ipt_txt.bind({
+				blur:function(w){
+					if($(this).val() == ""){
+						ipt_tips.show();
+					}
+					$(this).unbind("blur");
+				}
+			});
+		}
+	});
+
+
+
+	function signUp(){
+		var account = trim($("#account").val());
+		var pwd = trim($("#pwd").val());
+		if(!isEmail(account)){
+			$(".form-tips-error").html("请填写有效邮箱");
+			return;
+		}
+		if((pwd.length<1)){
+			$(".form-tips-error").html("请输入密码");
+			return;
+		}
+		$("#aform").submit();
+	}
+
+</script>
+
+</body>
+</html>

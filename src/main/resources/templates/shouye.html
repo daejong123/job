@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="xiaobeike/login.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/global.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/asyncbox.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/front.css">
+    <link type="text/css" rel="stylesheet" href="xiaobeike/main_2.css">
+
+
+    <script type="text/javascript" src="xiaobeike/jquery-1.js"></script>
+    <script type="text/javascript" src="xiaobeike/utils.js"></script>
+    <script type="text/javascript" src="xiaobeike/AsyncBox.js"></script>
+    <script type="text/javascript" src="xiaobeike/common.js"></script>
+    <style type="text/css">
+       body {
+            background: url(./login-bj.jpg) no-repeat fixed;
+            background-size: cover
+        }
+
+
+        .column {
+            max-width: 450px;
+        }
+            .content {
+            font-size: 50px;
+            margin-top: 5%;
+            margin-left: 25%;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+
+        .inner-span {
+            background-color: aqua;
+            width: 218px;
+            height: 180px;
+            font-size: 40px;
+            margin-left: 80px;
+            text-align: center;
+            border-radius: 15px;
+            line-height: 80px;
+            /*设置line-height与父级元素的height相等*/
+            text-align: center;
+            /*设置文本水平居中*/
+            overflow: hidden;
+            /*防止内容超出容器或者产生自动换行*/
+        }
+
+        .main {
+            <!--margin-top: 1%;-->
+            <!--margin-left: 15%;-->
+            display: flex;
+             -webkit-box-orient: horizontal;
+             -webkit-box-direction: normal;
+             -ms-flex-direction: row;
+            flex-direction: center;
+             -ms-flex-wrap: center;
+            flex-wrap: center;
+             -webkit-box-align: center;
+             -ms-flex-align: center;
+            align-items: center;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+    <div class="content">
+        <img src="logo.png">
+    </div>
+    </h2>
+</div>
+
+</div>
+<div class="main">
+    <button class="inner-span login" onclick="window.location.href='denglu.html'">
+        登录网站
+    </button>
+    <button class="inner-span news" onclick="window.location.href='/job/search/page'">
+        就业资讯
+    </button>
+    <button class="inner-span resume" onclick="window.location.href='/job/resume/make'">
+        填写简历
+    </button>
+</div>
+<!--云滚动-->
+<div id="demo" class="cloud-pic">
+    <table cellspace="0" align="left" border="0" cellpadding="0">
+        <tbody>
+        <tr>
+            <td id="demo1" valign="top">
+                <img src="xiaobeike/cloud-bj.png">
+                <img src="xiaobeike/cloud-bj.png">
+            </td>
+            <td id="demo2" valign="top">
+                <img src="xiaobeike/cloud-bj.png">
+                <img src="xiaobeike/cloud-bj.png">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+  var speed=60
+  demo2.innerHTML=demo1.innerHTML//克隆demo1为demo2
+  function Marquee(){
+  if(demo2.offsetWidth-demo.scrollLeft<=0)//当滚动至demo1与demo2交界时
+  demo.scrollLeft-=demo1.offsetWidth//demo跳到最左端
+  else{
+  demo.scrollLeft++
+  }
+  }
+  var MyMar=setInterval(Marquee,speed)//设置定时器60毫秒调用一次Marquee函数
+  demo.onmouseover=function() {clearInterval(MyMar)}//鼠标移上时清除定时器达到滚动停止的目的
+  demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)}//鼠标移开时重设定时器
+  </script>
+<!--云滚动-->
+<script>
+	//交互demo
+	$(".m-ipt-txt").bind({
+		click:function(){
+			var _this = $(this),
+			ipt_txt = _this.find(".ipt-txt"),
+			ipt_tips = _this.find(".ipt-tips");
+			$(".form-tips-error").html("");
+
+			ipt_tips.hide();
+			ipt_txt.focus();
+			ipt_txt.bind({
+				blur:function(w){
+					if($(this).val() == ""){
+						ipt_tips.show();
+					}
+					$(this).unbind("blur");
+				}
+			});
+		}
+	});
+
+</script>
+</body>
+</html>

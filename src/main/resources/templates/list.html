@@ -2,93 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>展示</title>
+    <title>资讯</title>
     <link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/semantic-ui/2.3.1/semantic.min.js"></script>
-    <!--<link href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet">-->
-    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
-    <!--<script src="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.js"></script>-->
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="${request.contextPath}/layer-v3.1.1/layer/layer.js"></script>
+    <style type="text/css">
+        body {
+            background: url(./login-bj.jpg) no-repeat fixed;
+            background-size: cover
+        }
+        body>.grid {
+            height: 100%;
+        }
+
+        .image {
+            margin-top: -100px;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+
+    </style>
 </head>
-<body style="margin:20px 30px 20px 30px">
-<div id="app">
+<body  style="margin:20px 30px 20px 30px">
 
-    <div class="ui secondary menu">
-        <h1>欢迎访问智慧招聘</h1>
-        <div class="right menu">
-            <a class="ui item" href="/job/search/page?searchKey=${searchKey}&page=1">首页</a>
-            <a class="ui item"
-               href="/job/search/page?searchKey=${searchKey}&page=${(pageInfo.hasPreviousPage)?string('${pageInfo.prePage}' ,'${pageInfo.pageNum}')}">上一页</a>
-            <a class="ui item"
-               href="/job/search/page?searchKey=${searchKey}&page=${(pageInfo.hasNextPage)?string('${pageInfo.nextPage}' ,'${pageInfo.pageNum}')}">下一页</a>
-            <a class="ui item" href="/job/search/page?searchKey=${searchKey}&page=${pageInfo.pages}">末页</a>
-        </div>
+<div class="ui secondary menu">
+    <h1>欢迎访问智慧招聘</h1>
+    <div class="right menu">
+        <a class="ui item" href="/job/search/page?searchKey=${searchKey}&page=1">首页</a>
+        <a class="ui item"
+           href="/job/search/page?searchKey=${searchKey}&page=${(pageInfo.hasPreviousPage)?string('${pageInfo.prePage}' ,'${pageInfo.pageNum}')}">上一页</a>
+        <a class="ui item"
+           href="/job/search/page?searchKey=${searchKey}&page=${(pageInfo.hasNextPage)?string('${pageInfo.nextPage}' ,'${pageInfo.pageNum}')}">下一页</a>
+        <a class="ui item" href="/job/search/page?searchKey=${searchKey}&page=${pageInfo.pages}">末页</a>
     </div>
-
-    <div class="ui divider"></div>
-
-    <div class="ui secondary menu">
-        <div class="ui left icon focus input">
-            <i class="ui search icon"></i>
-            <input type="text" placeholder="搜索" value="${searchKey}"/>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <div id="valueBtn" class="ui blue button">搜索</div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div @click="makeresume" class="ui blue button">制作简历</div>
-        </div>
-        <div class="right menu">
-            <h3>共<span class="ui red label">${pageInfo.pages}</span>页/当前为: <span
-                    class="ui red label">${pageInfo.pageNum}</span>页</h3>
-        </div>
-    </div>
-
-    <div class="ui sub header">多选</div>
-    <div id="select" class="ui fluid multiple search selection dropdown">
-        <input name="tags" type="hidden">
-        <i class="dropdown icon"></i>
-        <div class="default text">选择条件</div>
-        <div class="menu">
-            <div class="item" data-value="salary">薪水</div>
-            <div class="item" data-value="company">公司</div>
-            <div class="item" data-value="jobName">职位</div>
-            <div class="item" data-value="pubTime">发布日期</div>
-            <div class="item" data-value="Java">Java</div>
-            <div class="item" data-value="Web">Web</div>
-            <div class="item" data-value="iOS">移动端</div>
-        </div>
-    </div>
-
-
-    <table class="ui selectable celled striped table center aligned">
-        <thead>
-        <tr>
-            <td>序号</td>
-            <td>公司</td>
-            <td>职位</td>
-            <td>地址</td>
-            <td>发布日期</td>
-            <td>薪水</td>
-            <td>详情</td>
-        </tr>
-        </thead>
-        <tbody>
-        <#list list as jobEntity>
-        <tr>
-            <td>${jobEntity.jobId}</td>
-            <td>${jobEntity.company}</td>
-            <td>${jobEntity.jobName}</td>
-            <td>${jobEntity.address}</td>
-            <td>${jobEntity.pubTime}</td>
-            <td>${jobEntity.salary}</td>
-            <td><a href="${jobEntity.urlInfo}" target="_blank">查看详情</a></td>
-        </tr>
-        </#list>
-        </tbody>
-    </table>
-
 </div>
+
+<div class="ui divider"></div>
+
+<div class="ui secondary menu">
+    <div class="ui left icon focus input">
+        <i class="ui search icon"></i>
+        <input type="text" placeholder="搜索" value="${searchKey}"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div id="valueBtn" class="ui blue button">搜索</div>
+    </div>
+    <div class="right menu">
+        <h3>共<span class="ui red label">${pageInfo.pages}</span>页/当前为: <span
+                class="ui red label">${pageInfo.pageNum}</span>页</h3>
+    </div>
+</div>
+
+<div class="ui sub header">多选</div>
+<div id="select" class="ui fluid multiple search selection dropdown">
+    <input name="tags" type="hidden">
+    <i class="dropdown icon"></i>
+    <div class="default text">选择条件</div>
+    <div class="menu">
+        <div class="item" data-value="salary">薪水</div>
+        <div class="item" data-value="company">公司</div>
+        <div class="item" data-value="jobName">职位</div>
+        <div class="item" data-value="pubTime">发布日期</div>
+        <div class="item" data-value="Java">Java</div>
+        <div class="item" data-value="Web">Web</div>
+        <div class="item" data-value="iOS">移动端</div>
+    </div>
+</div>
+
+
+<table class="ui selectable celled striped table center aligned">
+    <thead>
+    <tr>
+        <td>序号</td>
+        <td>公司</td>
+        <td>职位</td>
+        <td>地址</td>
+        <td>发布日期</td>
+        <td>薪水</td>
+        <td>详情</td>
+    </tr>
+    </thead>
+    <tbody>
+    <#list list as jobEntity>
+    <td>${jobEntity.jobId}</td>
+    <td>${jobEntity.company}</td>
+    <td>${jobEntity.jobName}</td>
+    <td>${jobEntity.address}</td>
+    <td>${jobEntity.pubTime}</td>
+    <td>${jobEntity.salary}</td>
+    <td><a href="${jobEntity.urlInfo}" target="_blank">查看详情</a></td>
+    </tr>
+    </#list>
+    </tbody>
+</table>
 </body>
 <script>
     //    $("input:text").bind("input propertychange", function () {
@@ -100,25 +106,6 @@
     ////            console.log(data)
     ////        });
     //    });
-
-    new Vue({
-        el: "#app",
-        data: {},
-        methods: {
-            makeresume() {
-                window.location.href = "/job/resume/make";
-                // layer.open({
-                //     type: 1,
-                //     skin: 'layui-layer-lan',
-                //     title: "添加",
-                //     area: ['40%', '80%'],
-                //     shade: 0.3,
-                //     shadeClose: false,
-                //     content: jQuery("#inputs"),
-                // });
-            },
-        }
-    })
 
     $("#valueBtn").bind("click", function () {
         console.log($("input:text").val());
@@ -132,23 +119,6 @@
             window.location.href = "/job/search/page?searchKey=" + searchkey;
         }
     });
-
-    $('#select').dropdown({
-        allowAdditions: true,
-        maxSelections: 3,
-        onAdd: function (addedValue, addedText, $addedChoice) {
-            // // console.log(addedValue + addedText + $addedChoice);
-            // var searchkey = $("input:text").val();
-            // window.location.href = "/job/search/page?searchKey=" + searchkey + "&searchCondition=" + addedValue;
-        },
-        onRemove: function (removedValue, removedText, $removedChoice) {
-            // console.log(removedValue + removedText + $removedChoice);
-            // var searchkey = $("input:text").val();
-            // window.location.href = "/job/search/page?searchKey=" + searchkey + "&searchCondition=";
-        }
-    })
-
-
 
 </script>
 </html>
